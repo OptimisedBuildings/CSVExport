@@ -1,0 +1,8 @@
+<!-- Module Include File -->
+<!-- Types -->
+<types>
+  <!-- Type Example:<type name="MyClass" class="com.acme.BMyClass"/> -->
+  <!--com.optimised_buildings_ltd.CSVExport.test-->
+  <type class="com.optimised_buildings_ltd.CSVExport.test.BBadTest" name="BadTest"/>
+  <type class="com.optimised_buildings_ltd.CSVExport.test.BGoodTest" name="GoodTest"/>
+</types>

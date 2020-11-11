@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="CSVExport-rt" bajaVersion="0" vendor="optimised_buildings_ltd" vendorVersion="1.0" description="CSVExportModule" preferredSymbol="ce" nre="true" autoload="true" installable="true" buildMillis="1605086319455" buildHost="Pete-Ryzen" moduleName="CSVExport" runtimeProfile="rt">
+ <dependencies>
+  <dependency name="baja" vendor="Tridium" vendorVersion="4.8"/>
+  <dependency name="control-rt" vendor="Tridium" vendorVersion="4.8"/>
+ </dependencies>
+ <dirs/>
+ <types/>
+ <permissions>
+  <niagara-permission-groups type="all"/>
+  <niagara-permission-groups type="workbench"/>
+  <niagara-permission-groups type="station"/>
+ </permissions>
+</module>
