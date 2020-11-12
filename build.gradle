@@ -1,15 +1,7 @@
 /*
-  Copyright 2020 optimised_buildings_ltd, All Rights Reserved.
+  Copyright 2020 g, All Rights Reserved.
  */
 
-plugins {
-  id 'com.tridium.niagara-signing'
-  id 'com.tridium.niagara' apply false
-  id 'com.tridium.niagara-module' apply false
-  id 'com.tridium.niagara-rjs' apply false
-}
-
-import com.tridium.gradle.plugins.niagara.task.RunNiagaraTestTask
 
 def getGradleProperty(String propName) {
   if (gradle.hasProperty(propName)) {
@@ -25,15 +17,38 @@ ext.niagara_home = getGradleProperty('niagara_home')
 ext.niagara_dev_home = getGradleProperty('niagara_dev_home')
 ext.niagara_user_home = getGradleProperty('niagara_user_home')
 
+apply from: "${rootProject.ext.niagara_home}/etc/gradle/eclipse.gradle"
+apply from: "${rootProject.ext.niagara_home}/etc/gradle/idea.gradle"
+
 gradle.beforeProject { p ->
   configure(p) {
     def vendorSettings = file("${rootDir}/vendor.gradle")
     if (vendorSettings.exists()) {
       apply from: vendorSettings
     }
-    apply from: "${rootDir}/gradle/niagara.gradle"
-    tasks.withType(RunNiagaraTestTask) { RunNiagaraTestTask task ->
-      task.groups = []
+    apply from: "${rootProject.ext.niagara_home}/etc/gradle/niagara.gradle"
+  }
+}
+
+tasks.addRule("""
+Pattern: [jar[Test]|clean|<any gradle task>]/[path]: Run a Gradle task against a set of modules rooted at path.
+""") { String taskName ->
+  def matcher = taskName =~ /(.*?)(Test)?\/(.*)/
+  if (matcher) {
+    def command = matcher.group(1)
+    def includeTestModules = matcher.group(2) == 'Test'
+    def path = file("${projectDir}/${matcher.group(3)}").toPath()
+
+    assert path.toFile().exists()
+    def targetProjects = subprojects.findAll { it.projectDir.toPath().startsWith(path) }
+
+    // default is build command and build is an alias for Gradle's jar task
+    if (command.isEmpty() || command == 'build') { command = 'jar' }
+
+    // Create task for subproject
+    task(taskName, dependsOn: targetProjects.tasks[command])
+    if (includeTestModules && command == 'jar') {
+      tasks[taskName].dependsOn targetProjects.moduleTestJar
     }
   }
 }

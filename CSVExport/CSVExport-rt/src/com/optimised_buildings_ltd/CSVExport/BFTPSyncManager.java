@@ -1,5 +1,6 @@
 package com.optimised_buildings_ltd.CSVExport;
 
+
 import javax.baja.category.BCategoryMask;
 import javax.baja.category.BCategoryService;
 import javax.baja.category.BOrdToCategoryMap;
@@ -47,6 +48,10 @@ public class BFTPSyncManager extends BComponent implements BIExportMethod, BISer
   public static final Type TYPE = Sys.loadType(BFTPSyncManager.class);
 
 /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+
+
+
     public boolean begin(){
         return true;
 

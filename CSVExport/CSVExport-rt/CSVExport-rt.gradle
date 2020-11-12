@@ -13,9 +13,26 @@ dependencies {
   compile "Tridium:nre:4.8"
   compile "Tridium:baja:4.8"
   compile "Tridium:control-rt:4.8"
+
+  uberjar files('lib/commons-net-3.6.jar')
+  uberjar files('lib/commons-vfs2-2.6.0.jar')
+  uberjar files('lib/jsch-0.1.55.jar')
+  uberjar files('lib/commons-logging-1.2.jar')
+  uberjar files('res')
+  compile 'commons-net:commons-net:3.6'
+  compile 'commons-vfs2:commons-vfs2:2.6.0'
+  compile 'jsch:jsch:0.1.55'
+  compile 'commons-logging:commons-logging:1.2'
 }
 
 moduleTestJar {
   from('srcTest') {
+  }
+}
+
+// Import images to jar
+jar {
+  from('src') {
+    include 'res/*.*'
   }
 }

@@ -1,8 +1,8 @@
 <!-- Module Include File -->
-
 <!-- Types -->
 <types>
-  <!-- Type Example:
-  <type name="MyClass" class="com.acme.BMyClass"/>
-  -->
+  <!-- Type Example:<type name="MyClass" class="com.acme.BMyClass"/> -->
+  <!--com.optimised_buildings_ltd.CSVExport-->
+  <type class="com.optimised_buildings_ltd.CSVExport.BFTPSyncManager" name="FTPSyncManager"/>
+  <type class="com.optimised_buildings_ltd.CSVExport.BHistoryExporter" name="HistoryExporter"/>
 </types>

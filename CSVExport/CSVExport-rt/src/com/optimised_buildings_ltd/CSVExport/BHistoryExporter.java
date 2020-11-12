@@ -1,9 +1,15 @@
 package com.optimised_buildings_ltd.CSVExport;
 
+import javax.baja.nre.annotations.NiagaraAction;
+import javax.baja.nre.annotations.NiagaraProperty;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 
 @NiagaraType
+@NiagaraAction(name = "collectHistories")
+@NiagaraProperty(name = "timeRange", type = "BTimeRange", defaultValue = "BTimeRange.DEFAULT")
+@NiagaraProperty(name = "filterOfflineResults", type = "BBoolean", defaultValue = "BBoolean.FALSE")
+
 
 public class BHistoryExporter extends BComponent {
 /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
